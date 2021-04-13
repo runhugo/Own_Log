@@ -37,8 +37,24 @@ Venv Path：统一管理虚拟环境的目录，也就上边的WORKON_HOME
 ```
 设置成功后重启VS Code，即可在左下角选择虚拟环境的Python版本
 
+### 其他问题：
+1. 在VS Code中切换至虚拟环境时，会自动运行激活虚拟环境的脚本。但是在Windows下默认时禁止运行脚本的，因此需要先修改运行脚本的Policy。
+使用“win+r”，搜索“powershell”并以管理员身份打开，输入以下指令：
+```
+Set-ExecutionPolicy RemoteSigned
+```
+关于Policy的有效指令：
+```
+-- Restricted: 不载入任何配置文件，不运行任何脚本。 "Restricted" 是默认的。
+-- AllSigned: 只有被Trusted publisher签名的脚本或者配置文件才能使用，包括你自己再本地写的脚本。
+-- RemoteSigned: 对于从Internet上下载的脚本或者配置文件，只有被Trusted，publisher签名的才能使用。
+-- Unrestricted: 可以载入所有配置文件，可以运行所有脚本文件. 如果你运行一个从internet下载并且没有签名的脚本，在运行之前，你会被提示需要一定的权限。
+-- Bypass: 所有东西都可以使用，并且没有提示和警告。
+-- Undefined: 删除当前scope被赋予的ExecutionPolicy，但是Group Policy scope的Execution Policy不会被删除。
+```
 
 REFERENCE：
-- https://blog.csdn.net/qq1123642601/article/details/81359316
-- https://www.cnblogs.com/alice-cj/p/11642744.html
-- https://www.jianshu.com/p/fa75d3368210
+- [Python虚拟环境教程](https://blog.csdn.net/qq1123642601/article/details/81359316)
+- [virtualenvwrapper安装、配置及使用](https://www.cnblogs.com/alice-cj/p/11642744.html)
+- [VS Code Python虚拟环境配置](https://www.jianshu.com/p/fa75d3368210)
+- [修改Windows脚本运行的Policy](https://blog.csdn.net/w1254335471/article/details/106028599)
