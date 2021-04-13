@@ -39,6 +39,6 @@ Venv Path：统一管理虚拟环境的目录，也就上边的WORKON_HOME
 
 
 REFERENCE：
-https://blog.csdn.net/qq1123642601/article/details/81359316
-https://www.cnblogs.com/alice-cj/p/11642744.html
-https://www.jianshu.com/p/fa75d3368210
+- https://blog.csdn.net/qq1123642601/article/details/81359316
+- https://www.cnblogs.com/alice-cj/p/11642744.html
+- https://www.jianshu.com/p/fa75d3368210
