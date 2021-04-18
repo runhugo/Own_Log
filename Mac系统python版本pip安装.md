@@ -5,4 +5,5 @@ sudo easy_install pip==20.3.4
 ```
 
 Reference：
-- https://www.dtmao.cc/news_show_779382.shtml
+- [指定pip版本](https://www.dtmao.cc/news_show_779382.shtml)
+- [bad interpreter问题](https://blog.csdn.net/weixin_41948075/article/details/104274235)
