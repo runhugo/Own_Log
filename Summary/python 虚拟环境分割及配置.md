@@ -58,3 +58,105 @@ REFERENCE：
 - [virtualenvwrapper安装、配置及使用](https://www.cnblogs.com/alice-cj/p/11642744.html)
 - [VS Code Python虚拟环境配置](https://www.jianshu.com/p/fa75d3368210)
 - [修改Windows脚本运行的Policy](https://blog.csdn.net/w1254335471/article/details/106028599)
+
+----
+<br/>
+
+# Mac OS X
+系统：OS X 11.2
+
+### 1. 安装pyenv和pyenv-virtualenv
+使用```homebrew```安装：
+```
+brew install pyenv
+brew install pyenv-virtualenv
+```
+安装完成后，添加路径到环境配置中(在~/.bash_profile文件中)，添加一下语句
+```
+# pyenv settings
+export PYENV_ROOT=~/.pyenv         # 添加这句确保能切换python环境成功
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"             # 以下两句开启pyenv和virtualenv的自动补全
+eval "$(pyenv virtualenv-init -)"
+```
+
+### 2. 安装python指定版本
+```
+pyenv install 3.6.8
+(如果不知道有什么小版本，可以先输入大版本号3.6，随后会自动搜索可以安装的小版本让选择)
+```
+安装完成后可以通过命令行查看/切换版本
+```
+查看已安装版本：pyenv versions
+切换:
+- 全局：pyenv global 3.6.8
+- 指定当前目录的python版本：pyenv local 3.6.8
+```
+
+### 3. 创建虚拟环境
+```
+pyenv virtualenv [python版本] [环境名字]
+e.g: pyenv virtualenv 3.6.8 test_env
+(若不指定 python 版本，会默认使用当前环境 python 版本)
+```
+查看已有的虚拟环境：
+```
+pyenv virtualenvs
+```
+激活虚拟环境：
+```
+pyenv activate [env name]
+```
+退出虚拟环境：
+```
+pyenv deactivate
+```
+删除虚拟环境：
+```
+pyenv uninstall env-name
+rm -rf ~/.pyenv/versions/env-name  # 或者删除其真实目录
+```
+
+### 4.VS Code配置
+Mac下的VS Code可以自动检测虚拟环境？
+（反正我没配置...自动舅显示出来了）
+
+### 常见问题
+#### 1. 在虚拟环境下更新pip
+直接更新会报以下错误：
+```
+Could not install packages due to an EnvironmentError: HTTPSConnectionPool(host='files.pythonhosted.org', port=443): Max retries exceeded with url: /packages/fe/ef/60d7ba03b5c442309ef42e7d69959f73aacccd0d86008362a681c4698e83/pip-21.0.1-py3-none-any.whl (Caused by NewConnectionError('<pip._vendor.urllib3.connection.VerifiedHTTPSConnection object at 0x10e2aa978>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',)) 
+```
+要使用以下命令行：
+```
+python -m pip install --upgrade pip
+```
+#### 2. pyenv安装python报错
+- 原因：可能是安装时需要饮用的包/头文件错误？
+- 解决：需要指定具体的文件
+- 需要工具库：openssl readline sqlite3 xz zlib
+```
+使用以下命令行安装：
+CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include" \
+LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib" \ 
+pyenv install --patch [python version, e.g: 3.6.8] < <(curl -sSL https://github.com/python/cpython/commit/8ea6353.patch\?full_index\=1)
+
+(注意更换版本号)
+解释：
+CPPFLAGS 是 c 和 c++ 编译器的选项，这里指定了 zlib 头文件的位置，
+LDFLAGS 是 gcc 等编译器会用到的一些优化参数，这里是指定了 zlib 库文件的位置，
+$(brew --prefix zlib) 这一部分的意思是在终端里执行括号里的命令，显示 zlib 的安装路径，可以事先执行括号里的命令，用返回的结果替换 $(brew --prefix zlib)，效果是一样的，
+每一行行尾的反斜杠可以使换行时先不执行命令，而是把这三行内容当作一条命令执行，
+如果有多个依赖包都找不到，可以在引号里继续添加其它依赖包的信息
+
+作者：夜行的鸟
+链接：https://www.jianshu.com/p/c47c225e4bb5
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+
+Reference:
+- [使用 pyenv 管理 Python 版本 ](https://einverne.github.io/post/2017/04/pyenv.html)
+- [pyenv安装python报错参考1](https://www.jianshu.com/p/c47c225e4bb5)
+- [pyenv安装python报错参考2](https://github.com/pyenv/pyenv/issues/1737)
