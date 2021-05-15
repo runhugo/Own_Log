@@ -18,6 +18,7 @@ mysql -u root -p
 Reference：
 - [安装及访问](https://zhuanlan.zhihu.com/p/27960044)
 - [命令行访问mysql](https://cloud.tencent.com/developer/news/371453)
+- [新：homebrew安装](https://www.cnblogs.com/mybilibili/p/11604679.html#:~:text=homebrew%20安装%20mysql%20homebrew%20是%20macOS%20缺失的软件包管理器%2C譬如可以下载%20mysql、redis、wget,等等.操作系统：macOS%20High%20Sierra%20Version%2010.14.5%20Homebrew%20会将软件包安装到独立目录%2C并将其文件软链接至%20%2Fusr%2Flocal.)
 
 ---
 
