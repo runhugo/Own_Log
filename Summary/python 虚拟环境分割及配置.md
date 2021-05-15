@@ -80,6 +80,8 @@ eval "$(pyenv init -)"             # 以下两句开启pyenv和virtualenv的自�
 eval "$(pyenv virtualenv-init -)"
 ```
 
+注意：修改完.bash_profile保存后，记得执行命令行```source /.bash_profile```马上刷新应用配置
+
 ### 2. 安装python指定版本
 ```
 pyenv install 3.6.8
